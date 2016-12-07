@@ -1,5 +1,5 @@
 # tianditu  
-其中的`deploy`为响应weehook的uwsgi服务，使用的时候要把它放到其他目录中去  
+其中的`deploy`为响应weehook(coding.net)的uwsgi服务，使用的时候要把它放到其他目录中去  
 
 待解决问题：  
 
