@@ -100,7 +100,6 @@ class TileApp(object):
 if __name__ == "__main__":
     tap = TileApp({
         "IMG": "http://t0.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}",
-        "VEC": "http://t0.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}",
-        "CIA": "http://%s.tianditu.com/DataServer?T=cia_w&x={x}&y={y}&l={z}"
+        "VEC": "http://t0.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}"
     })
     tap.getTile("VEC", 842, 389, 10)

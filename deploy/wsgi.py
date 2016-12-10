@@ -1,10 +1,11 @@
 import uwsgi
 
 import json
-import subprocess, shlex, os
+import subprocess, shlex
+import os, signal
 
 WEBHOOK_TOKEN = "aa2f8abc7cd94163-8d123c0c880f5494"
-WEBROOT = "/root/tianditu"
+WEBROOT = "/root/PycharmProjects/tianditu"
 
 # params = {
 #     "ref": "refs/heads/master",
@@ -67,7 +68,16 @@ def application(env, start_response):
     subprocess.check_call(shlex.split(_cmd))
 
     for idx in range(8):
-        subprocess.Popen(shlex.split("uwsgi --ini uwsgi.ini"), cwd=os.path.join(WEBROOT, "t%s"%(str(idx))))
+        target = "t%s"%str(idx)
+        os.chdir(os.path.join(WEBROOT, target))
+        try:
+            pid = int(open("tdt.pid").read().strip())
+        except (IOError, ValueError), e:
+            print "FAILED TO RESTART %s"%target
+            continue
+
+        os.kill(pid, signal.SIGHUP)
+        print "%s restart successfully"%target
 
     start_response('200 OK', [('Content-Type', 'text/html')])
     return "ok"
